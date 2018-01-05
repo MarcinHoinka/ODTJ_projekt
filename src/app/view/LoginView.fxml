@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Group?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.PasswordField?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane id="ta_username" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.LoginController">
+   <children>
+      <Group layoutX="235.0" layoutY="91.0">
+         <children>
+            <Label layoutY="50.0" prefHeight="27.0" prefWidth="73.0" text="Bezpieczny" textFill="AQUA">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="70.0" layoutY="50.0" prefHeight="27.0" prefWidth="84.0" text="KIEROWCA" textFill="#19dd54">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="513.0" layoutY="14.0">
+         <children>
+            <Label opacity="0.0" prefHeight="27.0" prefWidth="33.0" text="Zoha" textFill="AQUA">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Label>
+            <Label layoutX="32.0" opacity="0.0" prefHeight="27.0" prefWidth="41.0" text="LABS" textFill="#24f064">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+            </Label>
+         </children>
+      </Group>
+      <Group layoutX="188.0" layoutY="161.0">
+         <children>
+            <TextField fx:id="tf_login" layoutX="65.0" layoutY="49.0" promptText="user" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </TextField>
+            <PasswordField fx:id="pf_passwd" layoutX="65.0" layoutY="115.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="32.0" prefWidth="177.0" promptText="hasło" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" />
+            <Button fx:id="btn_login" layoutX="175.0" layoutY="176.0" mnemonicParsing="false" onMouseClicked="#actionLogIn" style="-fx-background-color: #3C58FA;" text="Zaloguj" textFill="AQUA">
+               <font>
+                  <Font size="14.0" />
+               </font>
+            </Button>
+            <ImageView layoutY="106.0">
+               <image>
+                  <Image url="@../../../img/odtj_password-50.png" />
+               </image>
+            </ImageView>
+            <ImageView layoutY="40.0">
+               <image>
+                  <Image url="@../../../img/odtj_user_50.png" />
+               </image>
+            </ImageView>
+         </children>
+      </Group>
+      <ImageView layoutX="262.0" layoutY="39.0">
+         <image>
+            <Image url="@../../../img/odtj_shield_car-01.png" />
+         </image>
+      </ImageView>
+   </children>
+   <opaqueInsets>
+      <Insets />
+   </opaqueInsets>
+</AnchorPane>

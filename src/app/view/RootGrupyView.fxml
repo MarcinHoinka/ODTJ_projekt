@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ComboBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="600.0" prefWidth="800.0" style="-fx-background-color: #2D3447;" xmlns="http://javafx.com/javafx/9.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="app.controller.RootGrupyController">
+   <children>
+      <TableView fx:id="tbl_grupy" layoutX="15.0" layoutY="52.0" prefHeight="240.0" prefWidth="770.0" style="-fx-background-color: #99ccff;" tableMenuButtonVisible="true" AnchorPane.leftAnchor="15.0" AnchorPane.rightAnchor="15.0" AnchorPane.topAnchor="15.0">
+         <columns>
+            <TableColumn fx:id="tblc_id_gr" prefWidth="50.0" resizable="false" style="-fx-alignment: CENTER;" text="Nr gr" />
+            <TableColumn fx:id="tblc_nazwa" prefWidth="75.0" text="Nazwa" />
+            <TableColumn fx:id="tblc_data" text="Data" />
+            <TableColumn fx:id="tblc_instruktor" prefWidth="118.0" text="Instruktor" />
+            <TableColumn fx:id="tblc_szkolenie" prefWidth="213.0" text="Szkolenie" />
+            <TableColumn fx:id="tblc_tor" prefWidth="148.0" text="Tor" />
+            <TableColumn fx:id="tblc_czas_tr" prefWidth="69.0" style="-fx-alignment: CENTER;" text="Czas [h]" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="15.0" layoutY="265.0" prefHeight="27.0" prefWidth="118.0" text="Dodaj grupę" textFill="#eeeeee" AnchorPane.leftAnchor="15.0">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+      <TextField fx:id="tf_nazwa" layoutX="15.0" layoutY="305.0" prefHeight="25.0" prefWidth="200.0" promptText="nazwa" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" />
+      <TextField fx:id="tf_data" layoutX="15.0" layoutY="342.0" prefHeight="25.0" prefWidth="200.0" promptText="data" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" />
+      <ComboBox fx:id="cb_instr" layoutX="15.0" layoutY="379.0" onMouseClicked="#selectInstr" prefHeight="25.0" prefWidth="200.0" promptText="instruktor" style="-fx-background-color: #99ccff; -fx-border-color: #a6a6a6;" />
+      <ComboBox fx:id="cb_szkolenie" layoutX="15.0" layoutY="416.0" onMouseClicked="#selectInstr" prefHeight="25.0" prefWidth="200.0" promptText="szkolenie" style="-fx-background-color: #99ccff; -fx-border-color: #a6a6a6;" />
+      <ComboBox fx:id="cb_tor" layoutX="15.0" layoutY="453.0" onMouseClicked="#selectInstr" prefHeight="25.0" prefWidth="200.0" promptText="tor" style="-fx-border-color: #a6a6a6; -fx-background-color: #99ccff;" />
+      <Button fx:id="btn_showKursanci" layoutX="653.0" layoutY="266.0" mnemonicParsing="false" onMouseClicked="#actionShowKr" prefHeight="25.0" prefWidth="132.0" style="-fx-background-color: #3C58FA;" text="Pokaż kursantów" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btn_addInstr" layoutX="15.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionAdd" style="-fx-background-color: #3C58FA;" text="Dodaj" textFill="AQUA" />
+      <Button fx:id="btn_editInstr" layoutX="74.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionEdit" style="-fx-background-color: #3C58FA;" text="Edytuj" textFill="AQUA" />
+      <Button fx:id="btn_deleteInstr" layoutX="134.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionDelete" style="-fx-background-color: red;" text="Usuń" textFill="AQUA" />
+      <Button fx:id="btn_goBack" layoutX="531.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionGoBack" onMouseClicked="#actionGoBack" style="-fx-background-color: #151928;" text="Powrót" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
+      <TableView fx:id="tbl_kursanci_wgrupach" layoutX="245.0" layoutY="303.0" prefHeight="240.0" prefWidth="540.0" style="-fx-background-color: #99ccff;" tableMenuButtonVisible="true" AnchorPane.rightAnchor="15.0">
+         <columns>
+            <TableColumn fx:id="tblc_grupa" prefWidth="50.0" resizable="false" style="-fx-alignment: CENTER;" text="Grupa" />
+            <TableColumn fx:id="tblc_imie" prefWidth="84.0" text="Imie" />
+            <TableColumn fx:id="tblc_nazwisko" prefWidth="130.0" text="Nazwisko" />
+            <TableColumn fx:id="tblc_email" prefWidth="128.0" text="email" />
+            <TableColumn fx:id="tblc_telefon" prefWidth="120.0" text="telefon" />
+         </columns>
+         <columnResizePolicy>
+            <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+         </columnResizePolicy>
+      </TableView>
+      <Label layoutX="245.0" layoutY="265.0" prefHeight="27.0" prefWidth="118.0" text="Kursanci w grupie" textFill="#eeeeee">
+         <font>
+            <Font size="14.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>
