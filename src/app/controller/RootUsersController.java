@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,8 +8,10 @@ import app.model.RootUsersModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -70,8 +73,9 @@ public class RootUsersController {
     public ObservableList<RootUsersModel> dane = FXCollections.observableArrayList();
     PreparedStatement ps;
     Stage stage;
-    Integer id_selected, user_selected;
-    Parent Users;
+    Integer user_selected;
+    static int id_selected;
+    Parent User;
     String user_sel;
 
     
@@ -160,7 +164,24 @@ public class RootUsersController {
 
     @FXML
     void actionEdit(MouseEvent event) {
-
+    	try {
+        	id_selected = tbl_kursanci.getSelectionModel().getSelectedItem().getId_k(); 
+        	}
+        	catch (Exception e) {
+        		LoginController.alertError("B³¹d", "Zaznacz kursanta", "Aby usun¹æ kursanta musisz go najpierw zaznaczyæ");
+        	}
+    	Stage editStage = new Stage();
+    	Parent UserEdit = null; 
+    	try { 
+    		UserEdit = (Parent) FXMLLoader.load(getClass().getResource("/app/view/RootUserEditView.fxml"));
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	Scene scene = new Scene(UserEdit);
+    	editStage.setScene(scene);
+    	editStage.setTitle("Edytuj kursanta");
+    	editStage.setResizable(false);
+    	editStage.show();
     }
 
     @FXML
@@ -168,7 +189,7 @@ public class RootUsersController {
     	((Node)(event.getSource())).getScene().getWindow().hide();
     }
 
-    private void select() {
+    public void select() {
     	LoginController.connection();
     	dane.clear();
     	tbl_kursanci.setItems(dane);
