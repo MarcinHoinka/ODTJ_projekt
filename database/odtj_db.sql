@@ -7,8 +7,7 @@ CREATE TABLE instruktorzy (
     imie VARCHAR(50) NOT NULL,
     nazwisko VARCHAR(50),
     email VARCHAR(30) NOT NULL UNIQUE,
-    telefon VARCHAR(9),
-    id_gr VARCHAR(30)
+    telefon VARCHAR(9)
 );
 
 #alter table instruktorzy drop id_gr;
@@ -24,7 +23,7 @@ CREATE TABLE kursanci (
 
 #alter table kursanci drop id_gr;
 
-CREATE TABLE logowanie (
+CREATE TABLE logowanie_st (
     id_l INT PRIMARY KEY AUTO_INCREMENT UNIQUE,
     login VARCHAR(50) UNIQUE,
     haslo VARCHAR(50),
@@ -38,6 +37,23 @@ CREATE TABLE logowanie (
         REFERENCES kursanci (id_k)
         ON UPDATE CASCADE ON DELETE CASCADE
 );
+
+# logowanie po emailu by nadawać dane i dane logowania za jednym razem
+Create table logowanie (
+	id_l int primary key auto_increment unique,
+    email_i VARCHAR(50) UNIQUE,
+    email VARCHAR(50) UNIQUE,
+    haslo VARCHAR(50),
+    permission VARCHAR(2),
+	CONSTRAINT FK_email_i FOREIGN KEY (email_i)
+        REFERENCES instruktorzy (email_i)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+    CONSTRAINT FK_email FOREIGN KEY (email)
+        REFERENCES kursanci (email)
+        ON UPDATE CASCADE ON DELETE CASCADE
+    
+);
+
 
 insert into instruktorzy (imie, nazwisko, email, telefon) values ('Mario','Mariowski','mario@op.pl','603504988');
 insert into instruktorzy (imie, nazwisko, email, telefon) values ('Tomek','Sroczynski','srok@op.pl','607727988');
@@ -190,8 +206,6 @@ SELECT
 
 
 
-
-
 #tabela łącząca kursantów do róznych grup
 
 CREATE TABLE kursanci_w_grupach(
@@ -326,33 +340,61 @@ select * from instruktorzy_cc;
 
 # widoki łączące dane instruktorów z danymi logowania
 CREATE VIEW log_instruktorzy AS
-SELECT 
-    i.id_i,
-    i.imie,
-    i.nazwisko,
-	l.id_l,
-    l.login,
-    l.haslo,
-    l.permission
-	FROM 
-    logowanie AS l
-    JOIN
-    instruktorzy AS i ON (i.id_i = l.id_i);
+    SELECT 
+        i.id_i,
+        i.imie,
+        i.nazwisko,
+        l.id_l,
+        l.login,
+        l.haslo,
+        l.permission
+    FROM
+        logowanie AS l
+            JOIN
+        instruktorzy AS i ON (i.id_i = l.id_i);
+    
+# widok do tabeli w RootinstruktorController
+CREATE VIEW instruktorzy_root AS
+    SELECT 
+        i.id_i,
+        i.imie,
+        i.nazwisko,
+        i.email,
+        i.telefon,
+        l.login
+    FROM
+        instruktorzy AS i
+            LEFT JOIN
+        logowanie AS l ON (i.id_i = l.id_i);
 
 # widoki łączące dane kursantów z danymi logowania
 CREATE VIEW log_kursanci AS
-SELECT 
-    k.id_k,
+    SELECT 
+        k.id_k,
+        k.imie,
+        k.nazwisko,
+        l.id_l,
+        l.login,
+        l.haslo,
+        l.permission
+    FROM
+        logowanie AS l
+            JOIN
+        kursanci AS k ON (k.id_k = l.id_k);
+
+# widok do tabeli RootUserController
+CREATE VIEW kursanci_root AS
+select 
+	k.id_k,
     k.imie,
     k.nazwisko,
-	l.id_l,
-    l.login,
-    l.haslo,
-    l.permission
-	FROM 
-    logowanie AS l
-    JOIN
-    kursanci AS k ON (k.id_k = l.id_k);
-
-
+    k.email,
+    k.telefon,
+    l.login
+    FROM 
+    kursanci as k
+    LEFT JOIN
+    logowanie as l ON (k.id_k = l.id_k);
+    
+    
 
