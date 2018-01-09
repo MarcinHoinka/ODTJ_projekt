@@ -3,19 +3,20 @@ package app.model;
 public class RootInstruktorzyModel {
 
 	private int id_i;
-	private String imie, nazwisko, email, telefon;
+	private String imie, nazwisko, email, telefon, login;
 
 	
 	public RootInstruktorzyModel() {
 	}
 
-	public RootInstruktorzyModel(int id_i, String imie, String nazwisko, String email, String telefon) {
+	public RootInstruktorzyModel(int id_i, String imie, String nazwisko, String email, String telefon, String login) {
 		super();
 		this.id_i = id_i;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.email = email;
 		this.telefon = telefon;
+		this.login = login;
 	}
 
 	public int getId_i() {
@@ -56,6 +57,14 @@ public class RootInstruktorzyModel {
 
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
+	}
+
+	public String getLogin() {
+		return login;
+	}
+
+	public void setLogin(String login) {
+		this.login = login;
 	}
 	
 }

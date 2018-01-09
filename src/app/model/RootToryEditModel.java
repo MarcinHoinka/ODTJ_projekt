@@ -1,14 +1,17 @@
 package app.model;
 
-public class RootToryModel {
+public class RootToryEditModel {
 	
 	private int id_tr;
 	private String nazwa, adres, miasto, kod_pocztowy, telefon;
 	
-	public RootToryModel() {
+	
+	public RootToryEditModel() {
+		super();
 	}
 
-	public RootToryModel(int id_tr, String nazwa, String adres, String miasto, String kod_pocztowy, String telefon) {
+	public RootToryEditModel(int id_tr, String nazwa, String adres, String miasto, String kod_pocztowy,
+			String telefon) {
 		super();
 		this.id_tr = id_tr;
 		this.nazwa = nazwa;
@@ -65,7 +68,7 @@ public class RootToryModel {
 	public void setTelefon(String telefon) {
 		this.telefon = telefon;
 	}
+	
+	
 
-	
-	
 }

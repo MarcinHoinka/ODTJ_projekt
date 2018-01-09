@@ -1,10 +1,8 @@
 package app.controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import app.database.DBConnector;
 import app.model.RootInstruktorzyModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -12,6 +10,8 @@ import javafx.fxml.FXML;
 import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -38,6 +38,9 @@ public class RootInstruktorzyController {
 
     @FXML
     private TableColumn<RootInstruktorzyModel, String> tblc_telefon;
+    
+    @FXML
+    private TableColumn<RootInstruktorzyModel, String> tblc_login;
 
     @FXML
     private TextField tf_imie;
@@ -59,6 +62,18 @@ public class RootInstruktorzyController {
 
     @FXML
     private Button btn_deleteInstr;
+    
+    @FXML
+    private TextField tf_login;
+
+    @FXML
+    private PasswordField pf_passwd;
+    
+    @FXML
+    private ComboBox<RootInstruktorzyController> cb_permission;
+
+    @FXML
+    private Button btn_addLogowanie;
 
     @FXML
     private Button btn_goBack;
@@ -66,11 +81,10 @@ public class RootInstruktorzyController {
     
     public ObservableList<RootInstruktorzyModel> dane = FXCollections.observableArrayList();
     PreparedStatement ps;
-//    DBConnector db;
-//    Connection conn;
     Stage stage;
     Parent Instruktorzy; 
     int id_selected;
+      
     
     @FXML
     void actionAdd(MouseEvent event) {
@@ -96,6 +110,39 @@ public class RootInstruktorzyController {
 		tf_email.clear();
     	tf_telefon.clear();
     	select();
+    }
+    
+    @FXML
+    void actionAddLog(MouseEvent event) {
+    	if  (!tf_login.getText().equals("") && !pf_passwd.getText().equals("")) { 
+        	try {
+            	id_selected = tbl_instruktorzy.getSelectionModel().getSelectedItem().getId_i(); 
+            	}
+            	catch (Exception e) {
+            		LoginController.alertError("B³¹d", "Zaznacz instruktora", "Zaznacz instruktora któremu chcesz nadaæ login i has³o.");
+            	}
+        	
+        	LoginController.connection();
+        	PreparedStatement ps;
+        	
+        	try {
+        		ps = LoginController.conn.prepareStatement("insert into logowanie (login, haslo, permission, id_i)" + "values(?,?,?,?)" );
+        		ps.setString(1,tf_login.getText());
+        		ps.setString(2, pf_passwd.getText());
+        		ps.setString(3, "1");
+        		ps.setInt(4, id_selected);
+        		ps.executeUpdate();
+        	} catch (SQLException e) {
+    			e.printStackTrace();
+        	}
+        	}
+        	else {
+        		LoginController.alertError("B³¹d", "Wpisz dane!", "Wype³nij pola login i has³o!");
+        	}
+        	tf_login.clear();
+        	pf_passwd.clear();
+        	id_selected = 0;
+        	select();  
     }
     
     @FXML
@@ -134,7 +181,7 @@ public class RootInstruktorzyController {
     	dane.clear();
     	tbl_instruktorzy.setItems(dane);
     	try {
-    	ps = LoginController.conn.prepareStatement("SELECT * FROM instruktorzy;");
+    	ps = LoginController.conn.prepareStatement("SELECT * FROM instruktorzy_root;");
         ResultSet rs = ps.executeQuery();
     	while(rs.next()) {
     			dane.add(new RootInstruktorzyModel(
@@ -142,7 +189,8 @@ public class RootInstruktorzyController {
     					rs.getString("imie"),
     					rs.getString("nazwisko"),
     					rs.getString("email"),
-    					rs.getString("telefon")));
+    					rs.getString("telefon"),
+    					rs.getString("login")));
     	}
     	
     	tblc_id.setCellValueFactory(new PropertyValueFactory<RootInstruktorzyModel,Integer>("id_i"));
@@ -150,7 +198,7 @@ public class RootInstruktorzyController {
     	tblc_nazwisko.setCellValueFactory(new PropertyValueFactory<RootInstruktorzyModel,String>("nazwisko"));
     	tblc_email.setCellValueFactory(new PropertyValueFactory<RootInstruktorzyModel,String>("email"));
     	tblc_telefon.setCellValueFactory(new PropertyValueFactory<RootInstruktorzyModel,String>("telefon"));
-
+    	tblc_login.setCellValueFactory(new PropertyValueFactory<RootInstruktorzyModel,String>("login"));
     	tbl_instruktorzy.setItems(null);
     	tbl_instruktorzy.setItems(dane);
     	}

@@ -4,12 +4,9 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 
 import javafx.fxml.FXML;
-import javafx.scene.Node;
 import javafx.scene.Parent;
-import javafx.scene.control.Alert;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Stage;
 
@@ -42,7 +39,7 @@ public class RootUserEditController {
     @FXML
     private Button btn_goBack;
 
-    Connection conn;
+//    Connection conn;
     PreparedStatement ps, ps_logowanie;
     Stage stage;
     Parent UserEdit;
@@ -71,11 +68,7 @@ public class RootUserEditController {
 				ps.executeUpdate();    	    	
     	    	
     	    } else {
-    	    Alert insertError = new Alert(AlertType.ERROR);
-    		insertError.setTitle("B³¹d danych");
-    		insertError.setHeaderText("B³¹d wpisywania");
-    		insertError.setContentText("Aby wys³aæ dodaæ kursanta, wype³nij wszystkie pola (je¿eli pole nie ulega zmianie, wpisz poprzedni¹ wartoœæ");
-    		insertError.showAndWait();
+    	    	LoginController.alertError("B³¹d", "Brak danych!", "Wype³nij wszystkie pola.");
     		}
     		
 
@@ -88,7 +81,7 @@ public class RootUserEditController {
 
     @FXML
     void actionGoBack(MouseEvent event) {
-    	((Node)(event.getSource())).getScene().getWindow().hide();
+    	
     }
 
     public void initialize() {

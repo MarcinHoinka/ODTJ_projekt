@@ -1,5 +1,6 @@
 package app.controller;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -7,8 +8,10 @@ import app.model.RootToryModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -71,7 +74,7 @@ public class RootToryController {
     public ObservableList<RootToryModel> dane = FXCollections.observableArrayList();
     PreparedStatement ps;
     Stage stage;
-    Integer id_selected;
+    static int id_selected;
     Parent Tory;
     
     @FXML
@@ -136,6 +139,18 @@ public class RootToryController {
         	catch (Exception e) {
         		LoginController.alertError("B³¹d","Wybierz tor!" ,"Aby edytowaæ tor musisz go najpierw zaznaczyæ");
         	}
+    	Stage editStage = new Stage();
+    	Parent ToryEdit = null; 
+    	try { 
+    		ToryEdit = (Parent) FXMLLoader.load(getClass().getResource("/app/view/RootToryEditView.fxml"));
+    	} catch (IOException e) {
+    		e.printStackTrace();
+    	}
+    	Scene scene = new Scene(ToryEdit);
+    	editStage.setScene(scene);
+    	editStage.setTitle("Edytuj kursanta");
+    	editStage.setResizable(false);
+    	editStage.show();
     }
 
     @FXML
@@ -144,7 +159,7 @@ public class RootToryController {
     }
 
     
-    private void select() {
+    protected void select() {
     	
     	LoginController.connection();
     	dane.clear();

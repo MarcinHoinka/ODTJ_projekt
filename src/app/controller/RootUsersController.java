@@ -13,6 +13,7 @@ import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.PasswordField;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.TextField;
@@ -39,6 +40,9 @@ public class RootUsersController {
 
     @FXML
     private TableColumn<RootUsersModel, String> tblc_telefon;
+    
+    @FXML
+    private TableColumn<RootUsersModel, String> tblc_login;
 
     @FXML
     private TextField tf_imie;
@@ -60,6 +64,12 @@ public class RootUsersController {
 
     @FXML
     private Button btn_deleteKursanta;
+    
+    @FXML
+    private TextField tf_login;
+
+    @FXML
+    private PasswordField pf_passwd;
 
     @FXML
     private Button btn_goBack;
@@ -69,6 +79,9 @@ public class RootUsersController {
 
     @FXML
     private Button btn_addToGroup;
+    
+    @FXML
+    private Button btn_addLogowanie;
 
     public ObservableList<RootUsersModel> dane = FXCollections.observableArrayList();
     PreparedStatement ps;
@@ -108,6 +121,38 @@ public class RootUsersController {
     	select();
     }
 
+    @FXML
+    void actionAddLog(MouseEvent event) {
+    	if  (!tf_login.getText().equals("") && !pf_passwd.getText().equals("")) { 
+    	try {
+        	id_selected = tbl_kursanci.getSelectionModel().getSelectedItem().getId_k(); 
+        	}
+        	catch (Exception e) {
+        		LoginController.alertError("B³¹d", "Zaznacz kursanta", "Zaznacz kursanta któremu chcesz nadaæ login i has³o.");
+        	}
+    	
+    	LoginController.connection();
+    	PreparedStatement ps;
+    	
+    	try {
+    		ps = LoginController.conn.prepareStatement("insert into logowanie (login, haslo, permission, id_k)" + "values(?,?,?,?)" );
+    		ps.setString(1,tf_login.getText());
+    		ps.setString(2, pf_passwd.getText());
+    		ps.setString(3, "2");
+    		ps.setInt(4, id_selected);
+    		ps.executeUpdate();
+    	} catch (SQLException e) {
+			e.printStackTrace();
+    	}
+    	}
+    	else {
+    		LoginController.alertError("B³¹d", "Wpisz dane!", "Wype³nij pola login i has³o!");
+    	}
+    	tf_login.clear();
+    	pf_passwd.clear();
+    	id_selected = 0;
+    	select();   	
+    }
     
     @FXML
     void actionAddToGr(MouseEvent event) {
@@ -194,7 +239,7 @@ public class RootUsersController {
     	dane.clear();
     	tbl_kursanci.setItems(dane);
     	try {
-    	ps = LoginController.conn.prepareStatement("SELECT * FROM kursanci;");
+    	ps = LoginController.conn.prepareStatement("SELECT * FROM kursanci_root;");
         ResultSet rs = ps.executeQuery();
     	while(rs.next()) {
     			dane.add(new RootUsersModel(
@@ -202,7 +247,8 @@ public class RootUsersController {
     					rs.getString("imie"),
     					rs.getString("nazwisko"),
     					rs.getString("email"),
-    					rs.getString("telefon")));
+    					rs.getString("telefon"),
+    					rs.getString("login")));
     	}
     	
     	tblc_id.setCellValueFactory(new PropertyValueFactory<RootUsersModel,Integer>("id_k"));
@@ -210,6 +256,7 @@ public class RootUsersController {
     	tblc_nazwisko.setCellValueFactory(new PropertyValueFactory<RootUsersModel,String>("nazwisko"));
     	tblc_email.setCellValueFactory(new PropertyValueFactory<RootUsersModel,String>("email"));
     	tblc_telefon.setCellValueFactory(new PropertyValueFactory<RootUsersModel,String>("telefon"));
+    	tblc_login.setCellValueFactory(new PropertyValueFactory<RootUsersModel,String>("login"));
     	tbl_kursanci.setItems(null);
     	tbl_kursanci.setItems(dane);
     	}

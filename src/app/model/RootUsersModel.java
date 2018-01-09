@@ -3,20 +3,21 @@ package app.model;
 public class RootUsersModel {
 	
 	private int id_k;
-	private String imie, nazwisko, email, telefon;
+	private String imie, nazwisko, email, telefon, login;
 
 	
 	public RootUsersModel() {
 		super();
 	}
 
-	public RootUsersModel(int id_k, String imie, String nazwisko, String email, String telefon) {
+	public RootUsersModel(int id_k, String imie, String nazwisko, String email, String telefon, String login) {
 		super();
 		this.id_k = id_k;
 		this.imie = imie;
 		this.nazwisko = nazwisko;
 		this.email = email;
 		this.telefon = telefon;
+		this.login = login;
 	}
 
 	public int getId_k() {
@@ -59,7 +60,13 @@ public class RootUsersModel {
 		this.telefon = telefon;
 	}
 
+	public String getLogin() {
+		return login;
+	}
 
-	
+	public void setLogin(String login) {
+		this.login = login;
+	}
+
 	
 }
