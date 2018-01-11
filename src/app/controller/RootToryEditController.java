@@ -39,13 +39,9 @@ public class RootToryEditController {
     Stage stage;
     Parent ToryEdit;
     
-//    RootToryController refresh = new RootToryController();
-
     @FXML
     void actionGoBack(MouseEvent event) {
     	((Node)(event.getSource())).getScene().getWindow().hide();
-//    	refresh.select();
-// wywala 166 wiersz (3 z matody select) w  tory controller   	
     }
 
     @FXML

@@ -1,9 +1,8 @@
 package app.controller;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
-
 import javafx.fxml.FXML;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
@@ -39,13 +38,11 @@ public class RootUserEditController {
     @FXML
     private Button btn_goBack;
 
-//    Connection conn;
     PreparedStatement ps, ps_logowanie;
     Stage stage;
     Parent UserEdit;
 
-    
-//    mo¿na rozdzieliæ na dwa przyciski logowanie i dane usera
+ 
     @FXML
     void actionSave(MouseEvent event) throws Exception {
 
@@ -65,29 +62,17 @@ public class RootUserEditController {
 				ps_logowanie.setString(1, tf_login.getText());
 				ps_logowanie.setString(2, tf_password.getText());				
 				ps_logowanie.setInt(3, RootUsersController.id_selected);
-				ps.executeUpdate();    	    	
+				ps_logowanie.executeUpdate();    	    	
     	    	
     	    } else {
     	    	LoginController.alertError("B³¹d", "Brak danych!", "Wype³nij wszystkie pola.");
     		}
-    		
-
-    }
-
-    @FXML
-    void actionDelete(MouseEvent event) {
-
     }
 
     @FXML
     void actionGoBack(MouseEvent event) {
-    	
+    	((Node)(event.getSource())).getScene().getWindow().hide();
     }
-
-    public void initialize() {
-    	System.out.println("Test id_selected: " + RootUsersController.id_selected );
-    }
-    	
     
     
 }

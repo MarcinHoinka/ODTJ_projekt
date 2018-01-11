@@ -43,6 +43,7 @@
       </Label>
       <TextField fx:id="tf_login" layoutX="248.0" layoutY="403.0" prefHeight="27.0" prefWidth="200.0" promptText="login" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" AnchorPane.bottomAnchor="170.0" AnchorPane.leftAnchor="248.0" />
       <PasswordField fx:id="pf_passwd" layoutX="248.0" layoutY="440.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="27.0" prefWidth="200.0" promptText="hasło" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" AnchorPane.bottomAnchor="133.0" AnchorPane.leftAnchor="248.0" />
+      <Button fx:id="btn_addLogowanie" layoutX="337.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#actionAddLog" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #3C58FA;" text="Dodaj dane" textFill="AQUA" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="337.0" />
       <Label layoutX="467.0" layoutY="375.0" prefHeight="27.0" prefWidth="118.0" text="Dodaj do grupy" textFill="#eeeeee" AnchorPane.rightAnchor="15.0">
          <font>
             <Font size="14.0" />
@@ -50,7 +51,7 @@
       </Label>
       <TextField fx:id="tf_nrGrupy" layoutX="457.0" layoutY="403.0" prefHeight="27.0" prefWidth="120.0" promptText="nr. grupy" style="-fx-background-color: #2D3447; -fx-border-color: #a6a6a6; -fx-text-fill: aqua;" AnchorPane.rightAnchor="15.0" />
       <Button fx:id="btn_addToGroup" layoutX="465.0" layoutY="441.0" mnemonicParsing="false" onMouseClicked="#actionAddToGr" prefHeight="25.0" prefWidth="120.0" style="-fx-background-color: #3C58FA;" text="Dodaj do grupy" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
+      <Button fx:id="btn_refreshTbl" layoutX="624.0" layoutY="560.0" mnemonicParsing="false" onMouseClicked="#actionRefresh" style="-fx-background-color: #3C58FA;" text="Odśwież tabelę" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="79.0" />
       <Button fx:id="btn_goBack" layoutX="531.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionGoBack" onMouseClicked="#actionGoBack" style="-fx-background-color: #151928;" text="Powrót" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
-      <Button fx:id="btn_addLogowanie" layoutX="337.0" layoutY="479.0" mnemonicParsing="false" onMouseClicked="#actionAddLog" prefHeight="25.0" prefWidth="111.0" style="-fx-background-color: #3C58FA;" text="Dodaj dane" textFill="AQUA" AnchorPane.bottomAnchor="96.0" AnchorPane.leftAnchor="337.0" />
    </children>
 </AnchorPane>

@@ -81,6 +81,9 @@ public class RootUsersController {
     private Button btn_addToGroup;
     
     @FXML
+    private Button btn_refreshTbl;
+    
+    @FXML
     private Button btn_addLogowanie;
 
     public ObservableList<RootUsersModel> dane = FXCollections.observableArrayList();
@@ -229,6 +232,11 @@ public class RootUsersController {
     	editStage.show();
     }
 
+    @FXML
+    void actionRefresh(MouseEvent event) {
+    	select();
+    }
+    
     @FXML
     void actionGoBack(MouseEvent event) {
     	((Node)(event.getSource())).getScene().getWindow().hide();

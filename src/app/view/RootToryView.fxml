@@ -36,6 +36,7 @@
       <Button fx:id="btn_addTor" layoutX="16.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionAdd" onMouseClicked="#actionAdd" style="-fx-background-color: #3C58FA;" text="Dodaj" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="16.0" />
       <Button fx:id="btn_editTor" layoutX="74.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionEdit" onMouseClicked="#actionEdit" style="-fx-background-color: #3C58FA;" text="Edytuj" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="74.0" />
       <Button fx:id="btn_deleteTor" layoutX="134.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionDelete" onMouseClicked="#actionDelete" style="-fx-background-color: red;" text="Usuń" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="134.0" />
+      <Button fx:id="btn_refreshTbl" layoutX="689.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#actionRefresh" style="-fx-background-color: #3C58FA;" text="Odśwież tabelę" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
       <Button fx:id="btn_goBack" layoutX="531.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionGoBack" onMouseClicked="#actionGoBack" style="-fx-background-color: #151928;" text="Powrót" textFill="AQUA" AnchorPane.bottomAnchor="15.0" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>

@@ -116,5 +116,8 @@ public class LoginController {
 	} catch (SQLException e) {
 		e.printStackTrace();
 	}
+	tf_login.clear();
+	pf_passwd.clear();
+	
     }
 }

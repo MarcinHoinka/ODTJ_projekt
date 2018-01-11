@@ -45,6 +45,9 @@ public class RootToryController {
 
     @FXML
     private Button btn_deleteTor;
+    
+    @FXML
+    private Button btn_refreshTbl;
 
     @FXML
     private Button btn_goBack;
@@ -148,9 +151,14 @@ public class RootToryController {
     	}
     	Scene scene = new Scene(ToryEdit);
     	editStage.setScene(scene);
-    	editStage.setTitle("Edytuj kursanta");
+    	editStage.setTitle("Edytuj tor");
     	editStage.setResizable(false);
     	editStage.show();
+    }
+    
+    @FXML
+    void actionRefresh(MouseEvent event) {
+    	select();
     }
 
     @FXML

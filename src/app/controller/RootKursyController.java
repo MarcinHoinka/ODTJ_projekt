@@ -1,17 +1,18 @@
 package app.controller;
 
+import java.io.IOException;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-
 import app.database.DBConnector;
 import app.model.RootKursyModel;
-import app.model.RootToryModel;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.scene.Node;
 import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -55,6 +56,9 @@ public class RootKursyController {
 
     @FXML
     private Button btn_deleteSz;
+    
+    @FXML
+    private Button btn_refreshTbl;
 
     @FXML
     private Button btn_goBack;
@@ -63,7 +67,7 @@ public class RootKursyController {
     PreparedStatement ps;
     DBConnector db;
     Stage stage;
-    Integer id_selected;
+    static int id_selected;
     Parent Kursy;  
     
 
@@ -115,7 +119,29 @@ public class RootKursyController {
 
     @FXML
     void actionEdit(MouseEvent event) {
-
+    	try {
+        	id_selected = tbl_szkolenia.getSelectionModel().getSelectedItem().getId_sz(); 
+        	}
+        	catch (Exception e) {
+        		LoginController.alertError("B³¹d","Wybierz szkolenie!" ,"Aby edytowaæ szkolenie musisz je najpierw zaznaczyæ");
+        	}
+	    	Stage editStage = new Stage();
+	    	Parent KursyEdit = null; 
+	    	try { 
+	    		KursyEdit = (Parent) FXMLLoader.load(getClass().getResource("/app/view/RootKursyEditView.fxml"));
+	    	} catch (IOException e) {
+	    		e.printStackTrace();
+	    	}
+	    	Scene scene = new Scene(KursyEdit);
+	    	editStage.setScene(scene);
+	    	editStage.setTitle("Edytuj szkolenie");
+	    	editStage.setResizable(false);
+	    	editStage.show();
+    }
+    
+    @FXML
+    void actionRefresh(MouseEvent event) {
+    	select();
     }
 
     @FXML
@@ -124,7 +150,6 @@ public class RootKursyController {
     }
 
     private void select() {
-    	
     	LoginController.connection();
     	dane.clear();
     	tbl_szkolenia.setItems(dane);
@@ -138,14 +163,10 @@ public class RootKursyController {
     					rs.getString("opis"),
     					rs.getInt("czas_trwania")));
     	}
-    	
-//    	wpisujemy wartoœci do obiektów kolumn tabeli
     	tblc_id.setCellValueFactory(new PropertyValueFactory<RootKursyModel,Integer>("id_sz"));
     	tblc_nazwaSz.setCellValueFactory(new PropertyValueFactory<RootKursyModel,String>("nazwa_sz"));
     	tblc_opis.setCellValueFactory(new PropertyValueFactory<RootKursyModel,String>("opis"));
     	tblc_czasTrw.setCellValueFactory(new PropertyValueFactory<RootKursyModel,Integer>("czas_trwania"));
-    	
-//    	dodanie danych do tabeli view w postaci obiektu ObservableList
     	tbl_szkolenia.setItems(null);
     	tbl_szkolenia.setItems(dane);
     	}
