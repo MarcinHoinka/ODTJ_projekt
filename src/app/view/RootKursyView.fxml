@@ -33,6 +33,7 @@
       <Button fx:id="btn_addSz" layoutX="16.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionAdd" style="-fx-background-color: #3C58FA;" text="Dodaj" textFill="AQUA" />
       <Button fx:id="btn_editSz" layoutX="74.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionEdit" style="-fx-background-color: #3C58FA;" text="Edytuj" textFill="AQUA" />
       <Button fx:id="btn_deleteSz" layoutX="134.0" layoutY="561.0" mnemonicParsing="false" onMouseClicked="#actionDelete" style="-fx-background-color: red;" text="Usuń" textFill="AQUA" />
+      <Button fx:id="btn_refreshTbl" layoutX="736.0" layoutY="326.0" mnemonicParsing="false" onMouseClicked="#actionRefresh" style="-fx-background-color: #3C58FA;" text="Odśwież tabelę" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
       <Button fx:id="btn_goBack" layoutX="531.0" layoutY="561.0" mnemonicParsing="false" onKeyPressed="#actionGoBack" onMouseClicked="#actionGoBack" style="-fx-background-color: #151928;" text="Powrót" textFill="AQUA" AnchorPane.rightAnchor="15.0" />
    </children>
 </AnchorPane>
