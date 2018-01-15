@@ -9,6 +9,7 @@ import java.sql.SQLException;
 import app.database.DBConnector;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Alert;
@@ -16,9 +17,13 @@ import javafx.scene.control.Button;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert.AlertType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 public class LoginController {
+	
+    @FXML
+    private AnchorPane loginAPane;
 
    @FXML
     private TextField tf_login;
@@ -69,45 +74,49 @@ public class LoginController {
 			id_l = rs.getInt("id_l");
 			
 			if (perm.equals("0")) {
-				Stage stageUser = new Stage();
-				
+								
 				try {
 					parent = (Parent) FXMLLoader.load(getClass().getResource("/app/view/RootMainView.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
-				Scene scene = new Scene(parent);
-				stageUser.setScene(scene);
-				stageUser.setResizable(false);
-				stageUser.setTitle("Panel administratora");
-				stageUser.show();
+				Scene newScene = new Scene(parent);
+				Stage mainStage = (Stage)((Node)(event.getSource())).getScene().getWindow();
+				mainStage.hide();
+				mainStage.setScene(newScene);
+				mainStage.setResizable(false);
+				mainStage.setTitle("Panel administratora");
+				mainStage.show();
 			}
 			else if (perm.equals("1")) {
-				Stage stageUser = new Stage();
-				
+								
 				try {
 					parent = (Parent) FXMLLoader.load(getClass().getResource("/app/view/InstruktorMainView.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				Scene scene = new Scene(parent);
-				stageUser.setScene(scene);
-				stageUser.setResizable(false);
-				stageUser.setTitle("Panel instruktora");
-				stageUser.show();
+				Stage instrStage = (Stage)((Node)(event.getSource())).getScene().getWindow();
+				instrStage.hide();
+				instrStage.setScene(scene);
+				instrStage.setResizable(false);
+				instrStage.setTitle("Panel instruktora");
+				instrStage.show();
+
 			}					
 			else {
-				Stage stageAdmin = new Stage();
-				
+								
 				try {
 					parent = (Parent) FXMLLoader.load(getClass().getResource("/app/view/UserMainView.fxml"));
 				} catch (IOException e) {
 					e.printStackTrace();
 				}
 				Scene scene = new Scene(parent);
-				stageAdmin.setScene(scene);
-				stageAdmin.setTitle("Panel kursanta");
-				stageAdmin.show();
+				Stage userStage = (Stage)((Node)(event.getSource())).getScene().getWindow(); 
+				userStage.setScene(scene);
+				userStage.setResizable(false);
+				userStage.setTitle("Panel kursanta");
+				userStage.show();
 			}
 		}
 		else {
